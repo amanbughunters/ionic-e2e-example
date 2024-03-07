@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Ionic App
+      - name: Start Server
         run: npm start
 
       - name: Run Unit Tests
