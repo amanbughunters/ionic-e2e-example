@@ -2,6 +2,7 @@ import config from './wdio.shared.appium.config';
 
 // ============
 // Capabilities
+// ets
 // ============
 //
 // For all capabilities please check
