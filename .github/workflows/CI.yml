@@ -44,3 +44,5 @@ jobs:
           export DISPLAY=:99  # Set the display for running tests in xvfb
           SERVE_PORT=4200 xvfb-run --auto-servernum npm run ionic-e2e:develop -- --headless
           exit 0  # Exit with success code, regardless of the test result
+
+          timeout-minutes: 5
