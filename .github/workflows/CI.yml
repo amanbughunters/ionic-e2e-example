@@ -23,8 +23,8 @@ jobs:
 
       - name: Install ChromeDriver
         run: |
-          CHROMEDRIVER_VERSION="122.0.4"
-          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          LATEST_CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
 
@@ -38,6 +38,7 @@ jobs:
 
       - name: Start Server with xvfb
         run: xvfb-run --auto-servernum npm start & npx wait-on --timeout 120000 http://localhost:4200/
-
+        
       - name: Run Unit Tests
         run: SERVE_PORT=4200 npm run ionic-e2e:develop -- --headless
+        continue-on-error: false
