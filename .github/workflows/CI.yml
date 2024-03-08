@@ -28,8 +28,16 @@ jobs:
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
 
-      - name: Start Server
-        run: npm start & npx wait-on --timeout 120000 http://localhost:4200/
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Print Chrome and ChromeDriver versions
+        run: |
+          google-chrome --version
+          chromedriver --version
+
+      - name: Start Server with xvfb
+        run: xvfb-run --auto-servernum npm start & npx wait-on --timeout 120000 http://localhost:4200/
 
       - name: Run Unit Tests
         run: SERVE_PORT=4200 npm run ionic-e2e:develop -- --headless
