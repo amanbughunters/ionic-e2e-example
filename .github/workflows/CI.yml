@@ -21,6 +21,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install ChromeDriver
+        run: |
+          CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+
       - name: Start Server
         run: npm start & npx wait-on --timeout 120000 http://localhost:4200/
 
